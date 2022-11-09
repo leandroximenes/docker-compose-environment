@@ -50,10 +50,10 @@ if (isset($_SESSION) && isset($_SESSION['usuario'])) {
 }
 
 define("TIME_SESSAO", "7198"); //TEMPO LIMITE DE INATIVIDADE NO GG
-define("USER", "admin");
-define("PASS", "password");
+define("USER", "doc");
+define("PASS", "d0c3b");
 define("PORT", "5432");
-define("HOST", 'db'); // o mesmo nome do serviço do docker-composer.yml
+define("HOST", 'db'); // o nome do servico do docker-compose.yml
 define("DB", "sioc-leandro");
 define("DNS", "pgsql:dbname=" . DB . ";user=" . USER . ";password=" . PASS . ";host=" . HOST . ";port=" . PORT);
 define("OM", (isset($_SESSION) && isset($_SESSION['usuario']) ? $_SESSION['usuario']['id_om'] : ''));

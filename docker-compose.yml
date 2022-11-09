@@ -1,15 +1,19 @@
-version: '3.9'
-
+version: '3.7'
 services:
-  web:
-    build: .
-    container_name: apache_container
+  php-apache-xdebug:
+    container_name: xdebug-php
+    build: 
+      context: ./docker/php/
+    restart: always
     ports:
-      - 80:80
+      - '80:80'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./src:/var/www/html
+      - ./docker/php/log:/tmp/xdebug
     depends_on:
-      - db      
+      - db   
     networks:
       - my-network
 
@@ -17,10 +21,11 @@ services:
     image: postgres:10
     container_name: postgres_container
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: doc
+      POSTGRES_PASSWORD: d0c3b
+      POSTGRES_DB: sioc-leandro
     volumes:
-        - ./postgres:/var/lib/postgresql/data
+        - ./docker/postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
