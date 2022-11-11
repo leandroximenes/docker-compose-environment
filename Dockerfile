@@ -43,7 +43,7 @@ RUN apt-get update \
        php-ldap \
        php-msgpack php-igbinary php-redis \
        php-memcached php-pcov php-xdebug \
-    && curl -sS https://getcomposer.org/installer | php \
+    && curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sLS https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm \
