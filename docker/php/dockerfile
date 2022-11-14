@@ -19,7 +19,7 @@ RUN pear config-set http_proxy ${HTTP_PROXY}
 RUN apt update  && apt upgrade -y
 
 # configure php
-COPY conf.d/php.ini $PHP_INI_DIR/php.ini
+COPY conf.d/php.ini "${PHP_INI_DIR}/conf.d/my-php.ini"
 
 # install xdebug
 RUN yes | pecl install xdebug && docker-php-ext-enable xdebug
