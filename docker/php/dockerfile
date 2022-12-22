@@ -21,16 +21,15 @@ RUN apt update  && apt upgrade -y
 # configure php
 COPY conf.d/php.ini "${PHP_INI_DIR}/conf.d/my-php.ini"
 
-# install xdebug
-RUN yes | pecl install xdebug && docker-php-ext-enable xdebug
-COPY conf.d/xdebug.ini "${PHP_INI_DIR}/conf.d"
-
 # install php extensions
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions @fix_letsencrypt && \
     install-php-extensions pdo_pgsql pgsql pdo_mysql mysqli\
-    bcmath bz2 curl intl gd mbstring xml soap zip
+    bcmath bz2 curl intl gd mbstring xml soap zip xdebug
+
+# configure xdebug
+COPY conf.d/xdebug.ini "${PHP_INI_DIR}/conf.d"
 
 RUN chmod -R 777 /var/www/html 
 
